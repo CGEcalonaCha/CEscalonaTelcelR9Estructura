@@ -1,0 +1,97 @@
+﻿@model BL.Empleado
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container ">
+    <div class=row>
+        <div class="text-center">
+            <h2>Usuarios</h2>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione un Empleado para editarlo o + para agregar...</h5>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            @using (Html.BeginForm("GetAll", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+     
+                <div class="row">
+
+
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Nombre)
+
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fa-solid fa-user-pen" style="color: #000000;"></i></span>
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "SoloLetras(event,'txtNombre','lblNombre')"})
+
+                            @Html.Label(null, "", new{@id="lblNombre"})
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col text-center">
+                            <input type="submit" value="Buscar" class="btn btn-success" />
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+  
+                
+
+            }
+
+        </div>
+
+    </div>
+
+    <br />
+    <table class="table   table-hover table-bordered table-responsive">
+        <thead>
+            <tr class="table-secondary">
+
+
+                <td style="display :none;">id</td>
+                <td>Nombre</td>
+                <td>Puesto</td>
+                <td>Departamento</td>
+
+                <td>Eliminar</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BL.Empleado empleado in Model.Empleados)
+            {
+                <tr>
+
+
+                    <td style="display :none;">@empleado.IdEmpleado </td>
+                    <td>@empleado.Nombre </td>
+                    <td>@empleado.Puesto.Nombre </td>
+                    <td>@empleado.Departamento.Nombre </td>
+
+                    <td style="text-align: center; vertical-align: middle;"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Empleado", new { IdEmpleado = empleado.IdEmpleado})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"><i class="bi bi-eraser-fill" style="color: mintcream"></i>Eliminar</a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+

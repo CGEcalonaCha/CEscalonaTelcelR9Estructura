@@ -1,0 +1,41 @@
+﻿@model BL.Departamento
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container ">
+    <div class=row>
+        <div class="text-center">
+            <h2>Departamentos</h2>
+
+        </div>
+    </div>
+    <div style="text-align:center;">
+    <table class="table   table-hover table-bordered table-responsive">
+        <thead>
+            <tr class="table-secondary">
+
+
+                <td style="display :none;">id</td>
+                <td>Nombre</td>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BL.Departamento departamento in Model.Departamentos)
+            {
+                <tr>
+
+                    <td style="display :none;">@departamento.IdDepartamento </td>
+                    <td>@departamento.Nombre </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+</div>
